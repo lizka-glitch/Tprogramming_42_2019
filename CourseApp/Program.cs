@@ -1,46 +1,39 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 
-namespace CourseApp
+namespace Rextester
 {
     public class Program
     {
-        public static double MyFunction(double a, double b, double x)
+        public static void Problem(double a, double b, double x_begin, double x_end, double x_delta)
         {
-            var y = (a * Math.Pow(x, 2)) + (b * x);
-            return y;
-        }
-
-        public static double[] TaskA(double a, double b, double xn, double xk, double dx)
-        {
-            return new double[0];
-        }
-
-        public static double[] TaskB(double a, double b, double[] x)
-        {
-            var y = new double[x.Length];
-            for (var i = 0; i < x.Length; i++)
+            double yA;
+            for (double x = x_begin; x < x_end; x = (x + x_delta))
             {
-                y[i] = MyFunction(a, b, x[i]);
+                yA = ((Math.Pow(a, x) - Math.Pow(b, x)) * (Math.Pow(a, (1 / 3)) * (Math.Pow(b, (1 / 3))))) /(Math.Log10(a/b));
+                Console.WriteLine(yA + " ");
+            }
+        }
+        public static void Arr(double a, double b)
+        {
+            double yB;
+            double[] arr = { 4.48, 3.56, 2.78, 5.28,3.21 };
+            for (int i = 0; i < 5; i++)
+            {
+                yB = ((Math.Pow(a, arr[i]) - Math.Pow(b, arr[i])) * (Math.Pow(a, (1 / 3)) * (Math.Pow(b, (1 / 3))))) / (Math.Log10(a / b));
+                Console.WriteLine(yB + " ");
             }
 
-            return y;
         }
-
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            const double a = 2.2;
-            const double b = 3.8;
-            var resSingle = MyFunction(a, b, 4);
-            Console.WriteLine(resSingle);
-            var x = new double[] { 1, 2, 3, 4, 5 };
-            var taskBRes = TaskB(a, b, x);
-            foreach (var item in taskBRes)
-            {
-                Console.WriteLine($"y = {item}");
-            }
+            Console.WriteLine("A ");
+            Rextester.Program.Problem(0.4, 0.8, 3.2, 6.2, 0.6);
+            Console.WriteLine("B ");
+            Rextester.Program.Arr(0.4, 0.8);
 
-            Console.ReadLine();
         }
     }
 }
